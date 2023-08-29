@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+
 import './App.css';
+import NavItems from './shared/NavItem';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Dashboard from '../src/pages/home/dasboard';
+import MainKonsulta from '../src/pages/konsulta/mainKonsultaForm'
+
+import Login from '../src/pages/login/Login';
+import {
+  BrowserRouter,
+  Routes, // instead of "Switch"
+  Route,
+} from "react-router-dom";
+
 
 function App() {
+    // Retrieve the object from storage
+    var get_user = localStorage.getItem('item');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {get_user != null ? 
+      <Box sx={{ display: 'flex' }}>
+          <BrowserRouter>
+            <NavItems />
+
+            <CssBaseline />
+
+            <Container maxWidth="lg" style={{marginTop: '70px'}}>
+                <Routes>
+                  <Route exact path="/"  element={ <Dashboard/> } />
+                  <Route exact path="/konsulta_registration"  element={ <MainKonsulta/> } />
+                  {/*
+                  <Route exact path="/files" element={ <Files/> }  />
+                  <Route exact path="/leaves" element={ <Leaves/> }  />
+                  <Route exact path="/konsulta" element={ <Konsulta/> }  /> */}
+                </Routes>
+              </Container>
+          </BrowserRouter>
+
+      </Box>
+    : <Login/>  }
+   </>
   );
 }
 
