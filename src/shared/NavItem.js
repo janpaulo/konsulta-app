@@ -184,7 +184,7 @@ function  NavItem() {
                 ))}
         </List>
         <Divider />
-        <List>
+        {/* <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
@@ -207,7 +207,7 @@ function  NavItem() {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <List>
         <ListItem  disablePadding sx={{ display: 'block' }}>
             <ListItemButton
