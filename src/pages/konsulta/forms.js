@@ -9,11 +9,7 @@ class forms extends React.Component{
     constructor(){
         super();
         this.state={
-            items : [
-                        
-                    ],
-
-										
+            items : [   ],
         }
 				this.handleSubmit = this.handleSubmit.bind(this)
       }

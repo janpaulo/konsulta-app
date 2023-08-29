@@ -18,6 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import VaccinesIcon from '@mui/icons-material/Vaccines';
+import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 //icons
@@ -93,7 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const items = [
   {name: "Dashboard", icon: <HomeTwoToneIcon/>, path: '',}, 
-  {name: "Home", icon: <HomeTwoToneIcon/>, path: 'konsulta_registration',},
+  {name: "Home", icon: <VaccinesIcon/>, path: 'konsulta_registration',},
   // {name: "Konsulta", icon: <SaveAsTwoToneIcon/>, path: 'konsulta',element: <Konsulta/>},
   // {name: "Employees", icon: <GroupsTwoToneIcon/>, path: 'employees', element: <Employee/>},
   // {name: "File", icon: <AttachFileTwoToneIcon/>, path: 'files',element:<Files/>},
@@ -138,13 +140,13 @@ function  NavItem() {
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: 'none' }),
+              ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-           APP NAME
+            APP NAME
           </Typography>
         </Toolbar>
       </AppBar>
@@ -152,36 +154,48 @@ function  NavItem() {
         <DrawerHeader>
           LOGO HERE
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-        {items.map((text, index) => (
-                    
-        <ListItem key={index} component={Link} to={"/" + text.path} disablePadding >  
+          {items.map((text, index) => (
+            <ListItem
+              key={index}
+              component={Link}
+              to={"/" + text.path}
+              disablePadding
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Tooltip title={text.name} placement="right" arrow>
+                    {text.icon}
+                  </Tooltip>
+                </ListItemIcon>
 
-                    <ListItemButton
-                        sx={{
-                        minHeight: 48,
-                        justifyContent: open ? 'initial' : 'center',
-                        px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
-                        sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}
-                        >
-                            {text.icon}
-                        </ListItemIcon>
-                        
-                        <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }}/>
-                       </ListItemButton>
-                    </ListItem>
-                ))}
+                <ListItemText
+                  primary={text.name}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         {/* <List>
@@ -209,14 +223,13 @@ function  NavItem() {
           ))}
         </List> */}
         <List>
-        <ListItem  disablePadding sx={{ display: 'block' }}>
+          <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
+                justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-              
               onClick={(event) => {
                 handleSubmit(event);
               }}
@@ -224,21 +237,19 @@ function  NavItem() {
               <ListItemIcon
                 sx={{
                   minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
                 }}
               >
-             <LogoutRoundedIcon/>
+                <Tooltip title="Logout" placement="right" arrow>
+                  <LogoutRoundedIcon />
+                </Tooltip>
               </ListItemIcon>
               <ListItemText primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-        
         </List>
       </Drawer>
-
-
-
     </Box>
   );
 }
